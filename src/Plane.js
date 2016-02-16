@@ -1,5 +1,5 @@
-var Plane = function() {};
-
-"use strict";
-
-Plane.prototype.land = function() {};
+// var Plane = function() {};
+function Plane(){}
+Plane.prototype.land = function(airport){
+  airport.clearForLanding(this);
+};

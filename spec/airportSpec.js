@@ -1,12 +1,18 @@
-describe('Airport', function() {
+describe('Airport', function(){
 
-  var Airport;
+  var airport;
 
-    beforeEach(function() {
+    beforeEach(function(){
       airport = new Airport();
     });
 
-    it('has no planes on creation', function() {
+    it('has no planes on creation', function(){
       expect(airport.planes()).toEqual([]);
     });
+
+    it('can clear planes for landind', function(){
+      airport.clearForLanding(plane);
+      expect(airport.planes()).toEqual([plane]);
+    });
+    
 });
