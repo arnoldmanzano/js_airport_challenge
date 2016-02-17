@@ -8,15 +8,21 @@ Airport.prototype.planes = function(){
 };
 
 Airport.prototype.clearForLanding = function(plane) {
-  this.hanger.push(plane);
+  if (this.weather.isStormy() === true) {
+    throw new Error("Weather is to stormy to land");
+  }
+  else {
+    this.hanger.push(plane);
+  }
 };
 
 Airport.prototype.clearForTakeOff = function(plane) {
   if (this.weather.isStormy() === true) {
     throw new Error("Weather is to stormy to take off");
-  } else {
-      this.hanger.splice(this.hanger.indexOf(plane), 1);
-    }
+  }
+  else {
+    this.hanger.splice(this.hanger.indexOf(plane), 1);
+  }
 };
 
 // Airport.prototype.checkWeather = function() {

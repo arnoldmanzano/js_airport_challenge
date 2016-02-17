@@ -39,9 +39,14 @@ describe('Airport', function(){
   describe('when weather is stormy', function() {
 
     it('throws error when #takeOff is called and #isStormy', function() {
-      spyOn(weather, 'isStormy').and.returnValue(true);
       airport.clearForLanding(plane);
+      spyOn(weather, 'isStormy').and.returnValue(true);
       expect(function() {airport.clearForTakeOff(plane);}).toThrowError("Weather is to stormy to take off");
+    });
+
+    it('throws error when #land is called and #isStormy', function() {
+      spyOn(weather, 'isStormy').and.returnValue(true);
+      expect(function() {airport.clearForLanding(plane);}).toThrowError("Weather is to stormy to land");
     });
 
   });
