@@ -1,4 +1,4 @@
-describe('Airport', function(){
+describe('Features', function(){
 
   var plane;
   var airport;
@@ -64,6 +64,20 @@ describe('Airport', function(){
     spyOn(Math, 'random').and.returnValue(0.86);
     expect(function() {plane.land(airport);}).toThrowError("Weather is to stormy to land");
     expect(airport.planes()).not.toContain(plane);
+  });
+
+// USER STORY FIVE
+// As an air traffic controller
+// To ensure safety
+// I want to prevent landing when the airport is full
+
+  it('prevents landing when airport is full', function() {
+    spyOn(Math, 'random').and.returnValue(0.84);
+    for(p=1; p<=20; p++) {
+      plane.land(airport);
+    }
+    expect(function() {plane.land(airport);}).toThrowError("Airport is to full to land");
+    expect(airport.planes().length).toEqual(20);
   });
 
 });

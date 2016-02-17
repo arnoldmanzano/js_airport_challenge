@@ -6,7 +6,7 @@ describe('Weather', function() {
     weather = new Weather();
   });
 
-  it('responds to isStormy', function() {
+  it('responds to #isStormy', function() {
     expect(weather.isStormy).toBeDefined();
   });
 
@@ -15,7 +15,7 @@ describe('Weather', function() {
     expect(weather.isStormy()).toBe(true);
   });
 
-  it('can not be stormy', function() {
+  it('can be not stormy', function() {
     spyOn(Math, 'random').and.returnValue(0.84);
     expect(weather.isStormy()).toBe(false);
   });

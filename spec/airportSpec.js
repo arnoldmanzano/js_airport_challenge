@@ -51,4 +51,21 @@ describe('Airport', function(){
 
   });
 
+  describe('when full', function() {
+
+    it('responds to #_isFull', function() {
+      expect(airport._isFull()).toBe(false);
+      for (i=1; i<=20; i++) {
+        airport.clearForLanding(plane);
+      }
+      expect(airport._isFull()).toBe(true);
+    });
+
+    it('throws and error', function() {
+      spyOn(airport, '_isFull').and.returnValue(true);
+      expect(function() {airport.clearForLanding(plane);}).toThrowError("Airport is to full to land");
+    });
+
+  });
+
 });
