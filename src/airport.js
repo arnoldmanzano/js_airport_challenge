@@ -1,7 +1,6 @@
-function Airport(){
-
+function Airport(weather) {
   this.hanger = [];
-
+  this.weather = weather;
 }
 
 Airport.prototype.planes = function(){
@@ -15,3 +14,7 @@ Airport.prototype.clearForLanding = function(plane) {
 Airport.prototype.clearForTakeOff = function(plane) {
   this.hanger.splice(this.hanger.indexOf(plane), 1);
 };
+
+// Airport.prototype.checkWeather = function() {
+//   return this.weather;
+// };

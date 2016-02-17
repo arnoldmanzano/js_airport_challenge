@@ -38,4 +38,16 @@ describe('Airport', function(){
     plane.takeOff(airport);
     expect(airport.planes()).toEqual([]);
   });
+
+  // USER STORY THREE
+  // As an air traffic controller
+  // To ensure safety
+  // I want to prevent takeoff when weather is stormy
+
+  it('prevents take off when weather is stormy', function() {
+    plane.land(airport);
+    // expect(plane.takeOff(airport)).toThrowError("Cannot takeoff in stormy weather");
+    expect(function() {plane.takeOff(airport);}).toThrowError(/err/);
+    expect(airport.planes()).toContain(plane);
+  });
 });
