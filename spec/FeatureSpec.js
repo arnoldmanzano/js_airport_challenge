@@ -12,7 +12,7 @@ describe('Airport', function(){
 
   it('knows to instruct a plane to land', function() {
     plane.land(airport);
-    expect(airport.planes()).toContain(plane); 
+    expect(airport.planes()).toContain(plane);
   });
 
 });
