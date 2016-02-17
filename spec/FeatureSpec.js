@@ -3,11 +3,12 @@ describe('Features', function(){
   var plane;
   var airport;
   var weather;
+  var capacity;
 
   beforeEach(function() {
     plane = new Plane();
     weather = new Weather();
-    airport = new Airport(weather);
+    airport = new Airport(weather, capacity);
   });
 
 
@@ -78,6 +79,20 @@ describe('Features', function(){
     }
     expect(function() {plane.land(airport);}).toThrowError("Airport is to full to land");
     expect(airport.planes().length).toEqual(20);
+  });
+
+// USER STORY SIX
+// As the system designer
+// So that the software can be used for many different airports
+// I would like a default airport capacity that can be overridden as appropriate
+
+  it('capacity can be set on initialize', function() {
+    spyOn(Math, 'random').and.returnValue(0.84);
+    capacity = 1;
+    airport = new Airport(weather, capacity);
+    plane.land(airport);
+    expect(function() {plane.land(airport);}).toThrowError("Airport is to full to land");
+    expect(airport.planes().length).toEqual(1);
   });
 
 });

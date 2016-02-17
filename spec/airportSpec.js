@@ -3,12 +3,13 @@ describe('Airport', function(){
   var airport;
   var plane;
   var weather;
+  var capacity;
 
   beforeEach(function() {
     weather = {
       isStormy: function() {}
     };
-    airport = new Airport(weather);
+    airport = new Airport(weather, capacity);
   });
 
   describe('when weather is not stormy', function() {
@@ -64,6 +65,16 @@ describe('Airport', function(){
     it('throws and error', function() {
       spyOn(airport, '_isFull').and.returnValue(true);
       expect(function() {airport.clearForLanding(plane);}).toThrowError("Airport is to full to land");
+    });
+
+  });
+
+  describe('capacity', function() {
+
+    it('can be set on initialize', function() {
+      capacity = 0;
+      airport = new Airport(weather, capacity);
+      expect(airport._isFull()).toBe(true);
     });
 
   });

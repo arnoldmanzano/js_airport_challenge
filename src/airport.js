@@ -1,6 +1,8 @@
-function Airport(weather) {
+function Airport(weather, capacity) {
+  var DEFAULT_CAPACITY = 20;
   this.hanger = [];
   this.weather = weather;
+  this.capacity = typeof capacity !== 'undefined' ? capacity : DEFAULT_CAPACITY;
 }
 
 Airport.prototype.planes = function(){
@@ -29,7 +31,7 @@ Airport.prototype.clearForTakeOff = function(plane) {
 };
 
 Airport.prototype._isFull = function() {
-  if (this.hanger.length >= 20) {
+  if (this.hanger.length >= this.capacity) {
     return true;
   }
   else {
