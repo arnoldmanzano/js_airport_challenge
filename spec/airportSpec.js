@@ -4,10 +4,14 @@ describe('Airport', function(){
   var plane;
   var weather;
 
-    beforeEach(function(){
-      airport = new Airport(weather);
-      weather = jasmine.createSpyObj('weather', ['sunny']);
-    });
+  beforeEach(function() {
+    weather = {
+      isStormy: function() {}
+    };
+    airport = new Airport(weather);
+  });
+
+  describe('when weather is not stormy', function() {
 
     it('has no planes on creation', function(){
       expect(airport.planes()).toEqual([]);
@@ -19,16 +23,27 @@ describe('Airport', function(){
     });
 
     it('can clear planes for take off', function() {
+      spyOn(weather, 'isStormy').and.returnValue(false);
       airport.clearForLanding(plane);
       airport.clearForTakeOff(plane);
       expect(airport.planes()).toEqual([]);
     });
 
     it('responds to weather', function() {
+      spyOn(weather, 'isStormy');
       expect(airport.weather).toBeDefined();
     });
 
-    it('knows when the weather is stormy', function() {
-      expect(airport.weather.isStormy()).toBe(true);
+  });
+
+  describe('when weather is stormy', function() {
+
+    it('throws error when #takeOff is called and #isStormy', function() {
+      spyOn(weather, 'isStormy').and.returnValue(true);
+      airport.clearForLanding(plane);
+      expect(function() {airport.clearForTakeOff(plane);}).toThrowError("Weather is to stormy to take off");
     });
+
+  });
+
 });

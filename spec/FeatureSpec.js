@@ -2,10 +2,12 @@ describe('Airport', function(){
 
   var plane;
   var airport;
+  var weather;
 
   beforeEach(function() {
     plane = new Plane();
-    airport = new Airport();
+    weather = new Weather();
+    airport = new Airport(weather);
   });
 
 
@@ -34,6 +36,7 @@ describe('Airport', function(){
 // I want to instruct a plane to take off from an airport and confirm that it is no longer in the airport
 
   it('knows to instruct a plane to take off', function() {
+    spyOn(Math, 'random').and.returnValue(0.84);
     plane.land(airport);
     plane.takeOff(airport);
     expect(airport.planes()).toEqual([]);
@@ -45,9 +48,10 @@ describe('Airport', function(){
   // I want to prevent takeoff when weather is stormy
 
   it('prevents take off when weather is stormy', function() {
+    spyOn(Math, 'random').and.returnValue(0.86);
     plane.land(airport);
     // expect(plane.takeOff(airport)).toThrowError("Cannot takeoff in stormy weather");
-    expect(function() {plane.takeOff(airport);}).toThrowError(/err/);
+    expect(function() {plane.takeOff(airport);}).toThrowError("Weather is to stormy to take off");
     expect(airport.planes()).toContain(plane);
   });
 });

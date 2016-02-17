@@ -12,7 +12,11 @@ Airport.prototype.clearForLanding = function(plane) {
 };
 
 Airport.prototype.clearForTakeOff = function(plane) {
-  this.hanger.splice(this.hanger.indexOf(plane), 1);
+  if (this.weather.isStormy() === true) {
+    throw new Error("Weather is to stormy to take off");
+  } else {
+      this.hanger.splice(this.hanger.indexOf(plane), 1);
+    }
 };
 
 // Airport.prototype.checkWeather = function() {
